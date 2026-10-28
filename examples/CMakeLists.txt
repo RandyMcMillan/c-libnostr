@@ -1,3 +1,13 @@
+cmake_minimum_required(VERSION 3.16)
+
+# Allow this file to be used as a top-level CMake project (e.g. `cmake -B build`
+# run from the examples/ directory) by pulling in the parent library build.
+if(NOT TARGET nostr AND NOT TARGET nostr_static)
+    set(LIBNOSTR_EXAMPLES_STANDALONE ON)
+    project(libnostr-c-examples LANGUAGES C)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/.. ${CMAKE_CURRENT_BINARY_DIR}/libnostr-c-build)
+endif()
+
 # Use static library on Windows to avoid DLL import library issues
 if(WIN32)
     set(NOSTR_LIB_TARGET nostr_static)
