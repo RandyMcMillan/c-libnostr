@@ -962,7 +962,9 @@ set_target_properties(nostr_static PROPERTIES
 
 enable_testing()
 add_subdirectory(tests)
-add_subdirectory(examples)
+if(NOT LIBNOSTR_EXAMPLES_STANDALONE)
+    add_subdirectory(examples)
+endif()
 add_subdirectory(benchmark)
 
 install(TARGETS nostr nostr_static
